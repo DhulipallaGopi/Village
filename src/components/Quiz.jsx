@@ -1,6 +1,6 @@
 // Quiz.jsx
 import React, { useState, useEffect } from "react";
-import "./quiz.css";
+import "./Quiz.css";
 import { questions } from "../data/data";
 
 // Translations for the message
