@@ -1,0 +1,147 @@
+/* Overlay dims background softly */
+.login-form-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font */
+}
+
+/* Container with gentle rounded corners and soft shadow */
+.login-form-container {
+  background: #fff8e1; /* Warm light yellow */
+  padding: 30px 35px;
+  border-radius: 15px;
+  max-width: 420px;
+  width: 95%;
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4); /* Yellow shadow */
+  border: 3px solid #ffca28;
+  text-align: center;
+  animation: popIn 0.3s ease forwards;
+}
+
+/* Animation for smooth entrance */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Title */
+.login-form-container h2 {
+  color: #f57f17; /* Dark golden yellow */
+  font-weight: 900;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 2px #ffb300;
+}
+
+/* Label style */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: #6d4c41; /* Warm brown */
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+/* Inputs bigger, rounded and colorful border */
+input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 6px;
+  margin-bottom: 22px;
+  box-sizing: border-box;
+  border: 3px solid #fbc02d; /* Bright yellow border */
+  border-radius: 25px;
+  font-size: 1.1rem;
+  color: #4e342e; /* Darker brown text */
+  box-shadow: inset 0 2px 5px rgba(251, 192, 45, 0.3);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* On focus, glow effect */
+input:focus {
+  outline: none;
+  border-color: #fdd835; /* lighter yellow */
+  box-shadow: 0 0 10px #fdd835;
+  background: #fffde7; /* soft cream */
+}
+
+/* Buttons container spaced nicely */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Submit button - bright yellow with shadow and hover effect */
+button[type="submit"] {
+  flex: 1;
+  background-color: #fbc02d;
+  color: #4e342e;
+  font-weight: 900;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  padding: 14px 0;
+  border: none;
+  box-shadow: 0 6px 12px rgba(251, 192, 45, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #fdd835;
+  transform: scale(1.05);
+}
+
+/* Cancel button - warm brown with subtle hover */
+button[type="button"] {
+  flex: 1;
+  background-color: #6d4c41;
+  color: #fffde7;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  padding: 14px 0;
+  border: none;
+  box-shadow: 0 6px 10px rgba(109, 76, 65, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button[type="button"]:hover {
+  background-color: #5d4037;
+  transform: scale(1.05);
+}
+
+/* Status message */
+.status-message {
+  margin-top: 16px;
+  font-style: italic;
+  color: #388e3c; /* green success */
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Responsive tweak for smaller devices */
+@media (max-width: 480px) {
+  .login-form-container {
+    padding: 25px 20px;
+  }
+
+  button[type="submit"],
+  button[type="button"] {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+}

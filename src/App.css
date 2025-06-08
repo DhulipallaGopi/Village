@@ -1,0 +1,359 @@
+/* Base styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #10ef17, #a8eb12); /* Bright gradient */
+  color: #fff;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 5px solid #fbc02d; /* Nice separator */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+  height: 200px; /* Fixed height for hero section */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero h1 {
+  margin-bottom: 0.7rem;
+  font-size: 2.5rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px #fbc02d;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.marquee-container marquee {
+  color: #151512; /* bright yellow */
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 0 6px #fbc02d, 0 0 10px #fdd835;
+}
+
+
+.hero p {
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+  font-size: 1.2rem;
+  color: #fffde7;
+  font-weight: 600;
+  line-height: 1.5;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Language Selector inside Hero */
+.language-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
+}
+
+.language-selector label {
+  color: #fffde7;
+}
+
+.language-selector select {
+  padding: 10px 14px;
+  border: 2px solid #fbc02d;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: #4e342e;
+  background-color: #fffde7;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.language-selector select:focus {
+  border-color: #fdd835;
+  box-shadow: 0 0 6px #fdd835;
+  outline: none;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 2rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* Carousel */
+.carousel {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  color: rgb(234, 189, 25);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, #007bffcc, #0056b3cc);
+  box-shadow: 0 4px 6px rgba(0,123,255,0.4);
+}
+
+.scroll-btn:hover {
+  background: linear-gradient(145deg, #007bff, #0056b3);
+  box-shadow: 0 6px 10px rgba(0,123,255,0.7);
+}
+
+.scroll-btn:active {
+  transform: scale(0.9);
+}
+
+/* Card Grid */
+.card-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scheme Card */
+.scheme-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  min-width: 280px;
+  max-width: 320px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scheme-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Scheme Image Styling */
+.scheme-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.scheme-card:hover .scheme-image {
+  transform: scale(1.05);
+}
+
+/* Scheme Title */
+.scheme-card h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Scheme Description */
+.scheme-card p {
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  color: #555;
+  line-height: 1.4;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* Button Group */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Button base styles */
+.btn, 
+.card-login-form button {
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  width: 180px;
+  align-self: center;
+  user-select: none;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  letter-spacing: 0.04em;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Focus outline */
+.btn:focus-visible {
+  outline: 3px solid #ffae73;
+  outline-offset: 3px;
+}
+
+/* Optional bouncing effect on hover */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.btn:hover {
+  animation: bounce 0.4s ease;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Quiz container */
+.Quiz-app-container {
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+  height: 200px;
+  overflow: auto;
+  border: 2px solid #4CAF50;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .scheme-card {
+    min-width: 220px;
+    max-width: 260px;
+    padding: 0.8rem;
+  }
+
+  .scheme-image {
+    height: 140px;
+  }
+
+  .scheme-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .scheme-card p {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    width: 140px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1rem;
+  }
+
+  .scheme-card {
+    min-width: 180px;
+    max-width: 220px;
+  }
+
+  .scheme-image {
+    height: 120px;
+  }
+
+  .scheme-card h3 {
+    font-size: 1rem;
+  }
+
+  .scheme-card p {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    width: 120px;
+    font-size: 0.85rem;
+  }
+}
