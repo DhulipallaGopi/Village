@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import Quiz from "./components/Quiz";
 import LoginForm from "./components/LoginForm";
+import Rating from "./components/Ratings";
+import "./components/Ratings.css";
+
 import { languages, footerTexts, buttonTexts, schemes } from "./data/data";
 
 function App() {
@@ -174,6 +177,9 @@ function App() {
           <button className="scroll-btn" onClick={() => scroll("right")}>
             ›
           </button>
+        </div>
+        <div>
+        <Rating />
         </div>
       </main>
 

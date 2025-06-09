@@ -135,35 +135,7 @@ export const schemes =  [
     link: "https://quizizz.com/embed/quiz/6844138d15c7d3c3cda1dd61",
     imageUrl:pmkisanImg1
   },
-  {
-    id: 3,
-    translations: {
-      en: { name: "Swachh Bharat Abhiyan", description: "Clean India Mission for sanitation." },
-      hi: { name: "स्वच्छ भारत अभियान", description: "स्वच्छता के लिए भारत मिशन।" },
-      ta: { name: "சுவச்ச் பாரத் அபியான்", description: "சுகாதாரத்திற்கான இந்தியா மிஷன்." },
-      kn: { name: "ಸ್ವಚ್ಛ ಭಾರತ ಅಭಿಯಾನ", description: "ಶುಚಿಗೊಳಿಸುವ ಭಾರತ ಮಿಷನ್." },
-      bn: { name: "প্রধানমন্ত্রী কিষাণ সম্মান নিধি (PM-KISAN)", description: "কৃষকদের জন্য আয় সহায়তা কর্মসূচি।" },
-      gu: { name: "પ્રધાનમંત્રી ખેડૂત સન્માન નિધિ (PM-KISAN)", description: "કૃષકો માટે આવક સહાય યોજના." },
-      mr: { name: "प्रधानमंत्री किसान सम्मान निधी (PM-KISAN)", description: "शेतकऱ्यांसाठी उत्पन्न सहाय्यता योजना." },
-      ml: { name: "പ്രധാനമന്ത്രി കിസാൻ സന്മാൻ നിധി (PM-KISAN)", description: "കർഷകർക്ക് വരുമാനം പിന്തുണ പദ്ധതി." },
-      te: { name: "ప్రధాన మంత్రి కిసాన్ సన్మాన్ నిధి (PM-KISAN)", description: "వ్యవసాయులకు ఆదాయం మద్దతు పథకం." },
-      pa: { name: "ਪ੍ਰਧਾਨ ਮੰਤਰੀ ਕਿਸਾਨ ਸਨਮਾਨ ਨਿਧਿ (PM-KISAN)", description: "ਕਿਸਾਨਾਂ ਲਈ ਆਮਦਨ ਸਹਾਇਤਾ ਯੋਜਨਾ।" },
-      or: { name: "ପ୍ରଧାନମନ୍ତ୍ରୀ କିଷାଣ ସମ୍ମାନ ନିଧି (PM-KISAN)", description: "କୃଷକମାନଙ୍କ ପାଇଁ ଆୟ ସହାୟତା ଯୋଜନା।" },
-      as: { name: "প্ৰধানমন্ত্ৰী কৃষক সন্মান নিধি (PM-KISAN)", description: "কৃষকসকলৰ বাবে আয় সহায়তা আঁচনি।" },
-      ur: { name: "وزیراعظم کسان اعزاز فنڈ (PM-KISAN)", description: "کسانوں کے لیے آمدنی امدادی اسکیم۔" },
-      sd: { name: "وزيراعظم ڪسان سڏاڻي نٿي (PM-KISAN)", description: "ڪسانن لاءِ آمدني مدد اسڪيم." },
-      kok: { name: "प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)", description: "शेतीदारांसाठी उत्पन्न सहाय्यता योजना." },
-      ne: { name: "प्रधानमन्त्री किसान सम्मान निधि (PM-KISAN)", description: "किसानहरूको लागि आम्दानी सहायता योजना।" },
-      ks: { name: "وزیراعظم کسان اعزاز فنڈ (PM-KISAN)", description: "کسانوں کے لیے آمدنی امدادی اسکیم۔" },
-      mai: { name: "प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)", description: "किसान सभक लेल आमदनी सहायता योजना।" },
-      doi: { name: "प्रधान मंत्री किसान सम्मान निधि (PM-KISAN)", description: "किसानां खातिर आमदनी मदद योजना।" },
-      bdo: { name: "प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)", description: "किसान मनो आमदनी मदद योजना।" },
-      mni: { name: "প্ৰধানমন্ত্ৰী কিসান সন্মান নিধি (PM-KISAN)", description: "কিসানবির ফোর আয় সহায়তা প্রকল্প।" }
-    },
-    officialUrl: "https://swachhbharat.mygov.in/",
-    link: "https://www.bookwidgets.com/play/lOVjM3IQ-iQAFrPGGbgAAA/9GWEY9P/crosswords?teacher_id=5240680502263808",
-    imageUrl:pmkisanImg2
-  },
+
   {
     id: 4,
     translations: {
