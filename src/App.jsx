@@ -12,7 +12,7 @@ function App() {
   const scrollRef = useRef(null);
   const [loginCardId, setLoginCardId] = useState(null);
 
-  // Landbot Livechat (floating bubble) — loads immediately on mount
+  // Landbot Livechat (floating bubble)
   useEffect(() => {
     if (!window.myLandbotLivechat) {
       const s = document.createElement("script");
@@ -29,7 +29,7 @@ function App() {
     }
   }, []);
 
-  // Landbot Popup — loads on first mouseover or touchstart interaction
+  // Landbot Popup
   useEffect(() => {
     let myLandbotPopup = null;
 
@@ -135,7 +135,12 @@ function App() {
                 scheme.translations[lang] || scheme.translations["en"];
 
               return (
-                <div key={scheme.id} className="scheme-card">
+                <div
+                  key={scheme.id}
+                  className={`scheme-card ${
+                    loginCardId === scheme.id ? "no-hover" : ""
+                  }`}
+                >
                   <img
                     src={scheme.imageUrl}
                     alt={name}
@@ -161,14 +166,6 @@ function App() {
                       {currentButtonTexts.play}
                     </button>
                   </div>
-
-                  {loginCardId === scheme.id && (
-                    <LoginForm
-                      schemeName={schemeName}
-                      schemeLink={schemeLink}
-                      onCancel={() => setLoginCardId(null)}
-                    />
-                  )}
                 </div>
               );
             })}
@@ -178,10 +175,22 @@ function App() {
             ›
           </button>
         </div>
+
         <div>
-        <Rating />
+          <Rating />
         </div>
       </main>
+
+      {/* Modal overlay for LoginForm */}
+      {loginCardId && (
+        <div className="modal-overlay">
+          <LoginForm
+            schemeName={schemeName}
+            schemeLink={schemeLink}
+            onCancel={() => setLoginCardId(null)}
+          />
+        </div>
+      )}
 
       <footer className="footer">
         {footerTexts[lang] || footerTexts["en"]}
