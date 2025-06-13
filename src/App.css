@@ -12,17 +12,17 @@ body {
   min-height: 100vh;
 }
 
-/* Hero Section */
+
 .hero {
-  background: linear-gradient(135deg, #10ef17, #a8eb12); /* Bright gradient */
+  background: linear-gradient(135deg, #10ef17, #a8eb12);
   color: #fff;
-  padding: 2.5rem 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
   border-bottom: 5px solid #fbc02d;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,17 +34,12 @@ body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   font-weight: 900;
   color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px #fbc02d;
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 .marquee-container marquee {
@@ -56,11 +51,11 @@ body {
 
 .hero p {
   max-width: 650px;
-  margin: 0 auto 1.5rem;
+  margin: -30px auto 1.5rem;
   font-size: 1.2rem;
   color: #fffde7;
-  font-weight: 600;
-  line-height: 1.5;
+  font-weight: 500;
+  line-height: 1.2;
   animation: fadeInUp 1s ease;
 }
 
@@ -75,36 +70,61 @@ body {
   }
 }
 
-/* Language Selector */
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.village-logo {
+  height: 70px;
+  margin-top: 20px;
+  width: auto;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 .language-selector {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 1rem;
+  margin: -20px auto 1.5rem;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   background: rgba(255, 255, 255, 0.15);
   padding: 0.5rem 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   backdrop-filter: blur(5px);
+  height: auto;
+  white-space: nowrap;
 }
 
 .language-selector label {
   color: #fffde7;
 }
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn.logout {
+  background-color: #d9534f;
+  color: white;
+}
 
 .language-selector select {
-  padding: 10px 14px;
-  border: 2px solid #fbc02d;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  color: #4e342e;
-  background-color: #fffde7;
-  cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  background: #fff;
+  color: #000;
 }
 
 .language-selector select:focus {
@@ -113,7 +133,6 @@ body {
   outline: none;
 }
 
-/* Main Content */
 .content {
   flex: 1;
   padding: 2rem;
@@ -125,14 +144,12 @@ h2 {
   font-size: 1.8rem;
 }
 
-/* Carousel */
 .carousel {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-/* Scroll Buttons */
 .scroll-btn {
   font-size: 2rem;
   border: none;
@@ -146,20 +163,18 @@ h2 {
   align-items: center;
   justify-content: center;
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  background: linear-gradient(145deg, #007bffcc, #0056b3cc);
-  box-shadow: 0 4px 6px rgba(0,123,255,0.4);
+  box-shadow: 0 4px 6px rgba(47, 232, 18, 0.4);
 }
 
 .scroll-btn:hover {
-  background: linear-gradient(145deg, #007bff, #0056b3);
-  box-shadow: 0 6px 10px rgba(0,123,255,0.7);
+  background: linear-gradient(145deg, #b6bdc5, #a1aebc);
+  box-shadow: 0 6px 10px rgba(76, 233, 44, 0.7);
 }
 
 .scroll-btn:active {
   transform: scale(0.9);
 }
 
-/* Card Grid */
 .card-grid {
   display: flex;
   overflow-x: auto;
@@ -173,7 +188,6 @@ h2 {
   display: none;
 }
 
-/* Scheme Card */
 .scheme-card {
   background-color: white;
   border-radius: 10px;
@@ -198,7 +212,6 @@ h2 {
   box-shadow: none !important;
 }
 
-/* Scheme Image Styling */
 .scheme-image {
   width: 100%;
   height: 160px;
@@ -213,7 +226,6 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Scheme Title */
 .scheme-card h3 {
   font-size: 1.25rem;
   margin: 0 0 0.25rem 0;
@@ -224,7 +236,6 @@ h2 {
   text-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Scheme Description */
 .scheme-card p {
   font-size: 0.95rem;
   margin: 0 0 1rem 0;
@@ -234,7 +245,6 @@ h2 {
   flex-grow: 1;
 }
 
-/* Button Group */
 .btn-group {
   display: flex;
   flex-direction: column;
@@ -242,7 +252,6 @@ h2 {
   align-items: center;
 }
 
-/* Button styles */
 .btn, 
 .card-login-form button {
   font-weight: 700;
@@ -271,28 +280,44 @@ h2 {
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .btn:hover {
   animation: bounce 0.4s ease;
 }
 
-/* Footer */
 .footer {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
+  padding: 0.5rem 1rem; /* Reduced vertical padding */
+  background-color: rgb(211, 181, 34);
   text-align: center;
-  font-size: 0.9rem;
 }
 
-/* Quiz container */
+.official-sites {
+  margin-top: 0.5rem; /* Less vertical gap */
+}
+
+.official-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px; /* Slightly tighter spacing */
+  margin-top: 4px; /* Reduce spacing above logos */
+}
+
+.official-links img {
+  height: 36px; /* Slightly smaller logos */
+  width: auto;
+  border-radius: 50px;
+  transition: transform 0.3s;
+  padding-top: 0; /* Removed top padding */
+}
+
+.official-links img:hover {
+  transform: scale(1.1);
+}
+
+
 .Quiz-app-container {
   width: 80%;
   max-width: 400px;
@@ -305,7 +330,6 @@ h2 {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -322,65 +346,122 @@ h2 {
   animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.horizontal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
 }
 
-/* Responsive styles */
+.rating-container {
+  margin-right: 100px;
+}
+
+/* Keep ALL your existing CSS and add these new styles at the end */
+
+/* ... your existing styles for .app, .hero, .btn, etc. ... */
+
+/* ======================================= */
+/* ✨ NEW Styles for the Full-Screen Game Page */
+/* ======================================= */
+
+.game-page-container {
+  /* Take up the entire screen */
+  min-height: 100vh;
+  width: 100vw;
+  
+  /* Use a neutral background color */
+  background-color: #e9eef2; 
+
+  /* Flexbox to center the game content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* This is needed to position the back button */
+  position: relative; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.game-content-area {
+  /* Give the game itself some nice styling */
+  width: 100%;
+  max-width: 900px; /* Adjust as needed */
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+  /* Position the back button at the top left */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #6c757d;
+  color: white;
+  z-index: 10; /* Make sure it's on top */
+}
+
+.back-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Styles for the Login Form Modal (ensure these are present) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  color: #333;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (max-width: 768px) {
-  .scheme-card {
-    min-width: 220px;
-    max-width: 260px;
-    padding: 0.8rem;
-  }
-
-  .scheme-image {
-    height: 140px;
-  }
-
-  .scheme-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .scheme-card p {
-    font-size: 0.9rem;
-  }
-
-  .btn {
-    width: 140px;
-    font-size: 0.9rem;
-  }
+  .hero { height: auto; padding: 1rem; }
+  .hero h1 { font-size: 1.8rem; }
+  .hero p { font-size: 1rem; margin-top: 0; }
+  .header-content { flex-direction: column; text-align: center; }
+  .village-logo { height: 60px; margin: 0; }
+  .language-selector { flex-direction: column; gap: 6px; margin-top: 1rem; padding: 0.4rem 0.8rem; }
+  .carousel { flex-direction: column; }
+  .scroll-btn { font-size: 1.5rem; margin: 0.2rem; }
+  .card-grid { padding: 0.5rem; gap: 0.5rem; }
+  .scheme-card { min-width: 200px; max-width: 240px; padding: 0.8rem; }
+  .scheme-image { height: 130px; }
+  .scheme-card h3 { font-size: 1.1rem; }
+  .scheme-card p { font-size: 0.9rem; }
+  .btn { width: 140px; font-size: 0.9rem; padding: 0.5rem 1rem; }
+  .footer { font-size: 0.75rem; padding: 0.8rem; }
+  .Quiz-app-container { width: 95%; height: auto; padding: 0.8rem; }
+  .horizontal-container { flex-direction: column; gap: 10px; }
+  .rating-container { margin-right: 0; }
 }
 
 @media (max-width: 480px) {
-  .content {
-    padding: 1rem;
-  }
-
-  .scheme-card {
-    min-width: 180px;
-    max-width: 220px;
-  }
-
-  .scheme-image {
-    height: 120px;
-  }
-
-  .scheme-card h3 {
-    font-size: 1rem;
-  }
-
-  .scheme-card p {
-    font-size: 0.85rem;
-  }
-
-  .btn {
-    width: 120px;
-    font-size: 0.85rem;
-  }
+  .hero h1 { font-size: 1.5rem; }
+  .hero p { font-size: 0.95rem; }
+  .scheme-card { min-width: 160px; max-width: 200px; }
+  .scheme-image { height: 110px; }
+  .scheme-card h3 { font-size: 1rem; }
+  .scheme-card p { font-size: 0.85rem; }
+  .btn { width: 120px; font-size: 0.8rem; }
 }

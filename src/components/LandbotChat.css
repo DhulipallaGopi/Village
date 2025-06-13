@@ -1,0 +1,25 @@
+.chat-bubble {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(to bottom, #ff9933 33%, white 34% 66%, #138808 67%);
+  color: #0f3cc9; /* Ashoka Chakra Blue */
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.chat-bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 14px rgba(255, 153, 51, 0.4), 0 0 14px rgba(19, 136, 8, 0.4);
+}
