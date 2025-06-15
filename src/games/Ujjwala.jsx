@@ -91,7 +91,7 @@ const questSteps = [
 const langCodeMap = { en: 'en-US', hi: 'hi-IN' };
 
 // --- MAIN GAME COMPONENT ---
-const UjjwalaQuest = () => {
+const Ujjwala = () => {
     // Core State
     const [gameState, setGameState] = useState('LANGUAGE_SELECTION');
     const [language, setLanguage] = useState('en');
@@ -287,4 +287,4 @@ const styles = {
     feedback: { position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '100px', zIndex: 30, textShadow: '0 0 20px white' },
 };
 
-export default UjjwalaQuest;
+export default Ujjwala;

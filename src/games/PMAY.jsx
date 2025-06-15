@@ -2,6 +2,23 @@
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
 
+// --- A simple hook to check for media queries ---
+const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+
+    useEffect(() => {
+        const mediaQueryList = window.matchMedia(query);
+        const listener = (event) => setMatches(event.matches);
+
+        // 'change' event is the modern way to listen for changes
+        mediaQueryList.addEventListener('change', listener);
+        return () => mediaQueryList.removeEventListener('change', listener);
+    }, [query]);
+
+    return matches;
+};
+
+
 // --- Audio Assets ---
 const successSound = new Audio('https://actions.google.com/sounds/v1/achievements/achievement_bell.ogg');
 const failureSound = new Audio('https://actions.google.com/sounds/v1/negative/failure.ogg');
@@ -13,7 +30,7 @@ const celebrationSound = new Audio('https://actions.google.com/sounds/v1/crowds/
 // --- Family Avatars ---
 const familyAvatars = [
   { id: 'f1', emoji: '👨‍👩‍👧', name: { en: 'The Kumars', hi: 'कुमार परिवार', ta: 'குமார் குடும்பம்', te: 'కుమార్ కుటుంబం', kn: 'ಕುಮಾರ್ ಕುಟುಂಬ' } },
-  { id: 'f2', emoji: '👩‍👩‍👦‍👦', name: { en: 'The Guptas', hi: 'गुप्ता परिवार', ta: 'குப்தா குடும்பம்', te: 'గుప్తా కుటుంబం', kn: 'ಗುಪ್ತಾ ಕುಟುಂಬ' } },
+  { id: 'f2', emoji: '👩‍👩‍👦‍👦', name: { en: 'The Guptas', hi: 'गुप्ता परिवार', ta: 'குப்தா குடும்பம்', te: 'குப்தா కుటుంబం', kn: 'ಗುಪ್ತಾ ಕುಟುಂಬ' } },
   { id: 'f3', emoji: '👨‍👩‍👧‍👦', name: { en: 'The Singhs', hi: 'सिंह परिवार', ta: 'சிங் குடும்பம்', te: 'సింగ్ కుటుంబం', kn: 'ಸಿಂಗ್ ಕುಟುಂಬ' } },
 ];
 
@@ -77,42 +94,30 @@ const PMAY = ({ initialLang = 'en' }) => {
   const [buildProgress, setBuildProgress] = useState(0);
   const timersRef = useRef([]);
 
+  // This hook will be true if the viewport width is 768px or less
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   const langContent = useMemo(() => gameData[currentLang] || gameData.en, [currentLang]);
   
   const speakText = (text) => { if ('speechSynthesis' in window) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = currentLang + '-IN'; u.rate = 0.9; speechSynthesis.speak(u); } };
   
-  // *** THE FIX: This useEffect hook handles all cleanup ***
   useEffect(() => {
-    // The function returned from useEffect is the cleanup function.
-    // It runs when the component is unmounted (e.g., when you click "Back").
     return () => {
-      // 1. Stop any speaking text
-      if ('speechSynthesis' in window) {
-        speechSynthesis.cancel();
-      }
-
-      // 2. Pause all sound effects and reset them
+      if ('speechSynthesis' in window) { speechSynthesis.cancel(); }
       const allSounds = [successSound, failureSound, clickSound, buildSound, powerUpSound, celebrationSound];
-      allSounds.forEach(sound => {
-        sound.pause();
-        sound.currentTime = 0;
-      });
-
-      // 3. Clear any scheduled timers
+      allSounds.forEach(sound => { sound.pause(); sound.currentTime = 0; });
       timersRef.current.forEach(timerId => clearTimeout(timerId));
-      timersRef.current = []; // Reset the timers array
+      timersRef.current = [];
     };
-  }, []); // The empty array [] ensures this runs only on mount and unmount.
+  }, []);
 
 
   useEffect(() => { const stepContent = langContent.gameSteps[gameStep]; if(stepContent) { speakText(stepContent.title); } }, [gameStep, currentLang]);
 
   const changeStep = (newStep) => { 
     setGameStep('transition'); 
-    const timerId = setTimeout(() => { 
-      setGameStep(newStep); 
-    }, 300);
-    timersRef.current.push(timerId); // Keep track of the timer
+    const timerId = setTimeout(() => { setGameStep(newStep); }, 300);
+    timersRef.current.push(timerId);
   };
   
   const handleSelectAvatar = (avatar) => { clickSound.play(); setFamilyAvatar(avatar); changeStep('challenge'); };
@@ -133,14 +138,14 @@ const PMAY = ({ initialLang = 'en' }) => {
   
   const handleBuild = () => {
     buildSound.play();
-    setBuildProgress(p => Math.min(p + 10, 100)); // PMAY pipe is 10x faster!
+    setBuildProgress(p => Math.min(p + 10, 100));
   };
   
   useEffect(() => {
     if(buildProgress === 100) {
         celebrationSound.play();
         const timerId = setTimeout(() => changeStep('complete'), 2000);
-        timersRef.current.push(timerId); // Keep track of the timer
+        timersRef.current.push(timerId);
     }
   }, [buildProgress])
 
@@ -159,8 +164,10 @@ const PMAY = ({ initialLang = 'en' }) => {
       const showRoof = progress > 60;
       const showPaint = progress >= 100;
 
+      const houseContainerStyle = isMobile ? {...styles.houseBlueprint, transform: 'scale(0.9)'} : styles.houseBlueprint;
+
       return (
-          <div style={styles.houseBlueprint}>
+          <div style={houseContainerStyle}>
               <div style={styles.sky}>
                   {showPaint && <span style={{fontSize: '2rem', position:'absolute', top:'10px', left: '20px'}}>☀️</span>}
               </div>
@@ -176,31 +183,48 @@ const PMAY = ({ initialLang = 'en' }) => {
   }
   
   const renderPipes = () => (
-    <div style={styles.pipesContainer}>
+    <div style={isMobile ? styles.mobilePipesContainer : styles.pipesContainer}>
         {/* User's Pipe */}
         <div style={styles.pipe}>
             <div style={styles.pipeLabel}>{familyAvatar?.emoji}</div>
-            <div style={styles.pipeBody}><div style={styles.moneyFlowSmall}></div></div>
+            <div style={isMobile ? styles.mobilePipeBody : styles.pipeBody}>
+                <div style={isMobile ? styles.mobileMoneyFlowSmall : styles.moneyFlowSmall}></div>
+            </div>
         </div>
         {/* PMAY Subsidy Pipe */}
         {isEligible && (
             <div style={{...styles.pipe, ...styles.pipeSubsidy}}>
                 <div style={styles.pipeLabel}>🇮🇳 PMAY</div>
-                <div style={{...styles.pipeBody, ...styles.pipeBodySubsidy}}><div style={styles.moneyFlowLarge}></div></div>
+                <div style={isMobile ? {...styles.mobilePipeBody, ...styles.mobilePipeBodySubsidy} : {...styles.pipeBody, ...styles.pipeBodySubsidy}}>
+                    <div style={isMobile ? styles.mobileMoneyFlowLarge : styles.moneyFlowLarge}></div>
+                </div>
             </div>
         )}
     </div>
   );
 
   const renderContent = () => {
+    // Dynamic styles based on mobile view
+    const titleStyle = {...styles.title, fontSize: isMobile ? '1.7rem' : '2.2rem'};
+    const descriptionStyle = {...styles.description, fontSize: isMobile ? '1rem' : '1.1rem'};
+    const mainGameAreaStyle = isMobile ? {...styles.mainGameArea, flexDirection: 'column', gap: '20px'} : styles.mainGameArea;
+    const costMeterStyle = isMobile ? {...styles.costMeter, width: '90%', maxWidth: '350px', height: '60px'} : styles.costMeter;
+    const costMeterFillStyle = {
+      ...styles.costMeterFill,
+      ...(isMobile
+        ? { width: `${buildProgress}%`, height: '100%', transition: 'width 0.3s ease-out' }
+        : { height: `${buildProgress}%`, width: '100%', transition: 'height 0.3s ease-out' }
+      )
+    };
+
     switch (gameStep) {
       case 'welcome':
         return (<>
-          <h2 style={styles.title}>{langContent.gameSteps.welcome.title}</h2>
+          <h2 style={titleStyle}>{langContent.gameSteps.welcome.title}</h2>
           <div style={styles.avatarContainer}>
             {familyAvatars.map(avatar => (
               <button key={avatar.id} style={styles.avatarButton} onClick={() => handleSelectAvatar(avatar)}>
-                <span style={styles.avatarEmoji}>{avatar.emoji}</span>
+                <span style={{...styles.avatarEmoji, fontSize: isMobile ? '3rem' : '4rem'}}>{avatar.emoji}</span>
                 <span style={styles.avatarName}>{avatar.name[currentLang]}</span>
               </button>
             ))}
@@ -211,13 +235,13 @@ const PMAY = ({ initialLang = 'en' }) => {
       case 'building':
         const currentStepData = langContent.gameSteps[gameStep];
         return (<>
-            <h2 style={styles.title}>{currentStepData.title}</h2>
-            <p style={styles.description}>{currentStepData.description}</p>
-            <div style={styles.mainGameArea}>
+            <h2 style={titleStyle}>{currentStepData.title}</h2>
+            <p style={descriptionStyle}>{currentStepData.description}</p>
+            <div style={mainGameAreaStyle}>
                 {renderHouse(buildProgress)}
                 <div style={styles.meterContainer}>
-                    <div style={styles.costMeter}>
-                        <div style={{...styles.costMeterFill, height: `${buildProgress}%`}}></div>
+                    <div style={costMeterStyle}>
+                        <div style={costMeterFillStyle}></div>
                         <span style={styles.costMeterText}>₹</span>
                     </div>
                     {renderPipes()}
@@ -230,18 +254,21 @@ const PMAY = ({ initialLang = 'en' }) => {
       
       case 'eligibility':
         return (<>
-            <h2 style={styles.title}>{langContent.gameSteps.eligibility.title}</h2>
-            <p style={styles.description}>{langContent.gameSteps.eligibility.description}</p>
-            <div style={styles.eligibilityForm}>
-                {langContent.gameSteps.eligibility.questions.map(q => (
-                  <div key={q.key} style={styles.eligibilityQuestion}>
-                    <label style={styles.questionLabel}>{q.text}</label>
-                    <div style={styles.radioGroup}>
-                      <button onClick={() => handleEligibilityChange(q.key, true)} style={eligibilityAnswers[q.key] === true ? styles.radioSelected : styles.radio}>✅</button>
-                      <button onClick={() => handleEligibilityChange(q.key, false)} style={eligibilityAnswers[q.key] === false ? styles.radioSelected : styles.radio}>❌</button>
+            <h2 style={titleStyle}>{langContent.gameSteps.eligibility.title}</h2>
+            <p style={descriptionStyle}>{langContent.gameSteps.eligibility.description}</p>
+            <div style={{...styles.eligibilityForm, padding: isMobile ? '15px' : '20px'}}>
+                {langContent.gameSteps.eligibility.questions.map(q => {
+                  const questionStyle = isMobile ? {...styles.eligibilityQuestion, flexDirection: 'column', alignItems: 'flex-start', gap: '10px'} : styles.eligibilityQuestion;
+                  return (
+                    <div key={q.key} style={questionStyle}>
+                      <label style={{...styles.questionLabel, marginRight: isMobile ? 0 : '10px'}}>{q.text}</label>
+                      <div style={styles.radioGroup}>
+                        <button onClick={() => handleEligibilityChange(q.key, true)} style={eligibilityAnswers[q.key] === true ? styles.radioSelected : styles.radio}>✅</button>
+                        <button onClick={() => handleEligibilityChange(q.key, false)} style={eligibilityAnswers[q.key] === false ? styles.radioSelected : styles.radio}>❌</button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
             </div>
             <button style={styles.actionButton} onClick={handleCheckEligibility}>{langContent.gameSteps.eligibility.button}</button>
         </>);
@@ -250,8 +277,8 @@ const PMAY = ({ initialLang = 'en' }) => {
       case 'ineligible':
         const finalStepData = langContent.gameSteps[gameStep];
         return (<>
-            <h2 style={styles.title}>{finalStepData.title}</h2>
-            <p style={styles.description}>{finalStepData.description}</p>
+            <h2 style={titleStyle}>{finalStepData.title}</h2>
+            <p style={descriptionStyle}>{finalStepData.description}</p>
             {gameStep === 'complete' && <div style={styles.mainGameArea}>{renderHouse(100)}<span style={styles.finalFamily}>{familyAvatar?.emoji}</span></div>}
             {gameStep === 'ineligible' && (
                 <div style={styles.reasonBox}>
@@ -298,15 +325,15 @@ const styles = {
   header: { display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '10px' },
   langDropdown: { border: '2px solid #047857', borderRadius: '5px', padding: '5px', background: 'white', fontWeight: 'bold' },
   gameContent: { flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center' },
-  title: { color: '#064e3b', fontSize: '2.2rem', marginBottom: '15px' },
-  description: { fontSize: '1.1rem', color: '#1f2937', maxWidth: '600px', margin: '0 auto 25px auto', lineHeight: '1.6' },
+  title: { color: '#064e3b', marginBottom: '15px', padding: '0 10px' },
+  description: { color: '#1f2937', maxWidth: '600px', margin: '0 auto 25px auto', lineHeight: '1.6', padding: '0 10px' },
   actionButton: { padding: '12px 30px', fontSize: '1.1rem', color: 'white', backgroundColor: '#10b981', border: 'none', borderRadius: '8px', cursor: 'pointer', marginTop: '20px', transition: 'all 0.2s', boxShadow: '0 4px #059669', ':hover': { transform: 'translateY(-2px)' }, ':active': { transform: 'translateY(2px)', boxShadow: '0 2px #059669' } },
   avatarContainer: { display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' },
   avatarButton: { background: 'white', border: '3px solid #a7f3d0', borderRadius: '15px', cursor: 'pointer', padding: '15px', transition: 'all 0.2s ease-in-out', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', ':hover': { borderColor: '#10b981', transform: 'scale(1.1)' } },
   avatarEmoji: { fontSize: '4rem' },
   avatarName: { fontWeight: 'bold', color: '#065f46' },
-  mainGameArea: { display: 'flex', gap: '40px', alignItems: 'flex-end', justifyContent: 'center', margin: '20px 0', position: 'relative' },
-  houseBlueprint: { width: '300px', height: '300px', position: 'relative', overflow: 'hidden' },
+  mainGameArea: { display: 'flex', gap: '40px', alignItems: 'flex-end', justifyContent: 'center', margin: '20px 0', position: 'relative', width: '100%' },
+  houseBlueprint: { width: '300px', height: '300px', position: 'relative', overflow: 'hidden', flexShrink: 0 },
   sky: { position: 'absolute', top: 0, left: 0, width: '100%', height: '70%', background: '#7dd3fc' },
   ground: { position: 'absolute', bottom: 0, left: 0, width: '100%', height: '30%', background: '#65a30d' },
   housePart: { position: 'absolute', transition: 'all 0.5s ease-in-out', animation: 'buildUp 0.5s' },
@@ -315,9 +342,9 @@ const styles = {
   roof: { bottom: '140px', left: '50px', width: 0, height: 0, borderLeft: '100px solid transparent', borderRight: '100px solid transparent', borderBottom: '60px solid #dc2626' },
   painted: { backgroundColor: '#c4b5fd' },
   door: { bottom: '20px', left: '125px', width: '50px', height: '80px', backgroundColor: '#78350f' },
-  meterContainer: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  costMeter: { width: '80px', height: '300px', backgroundColor: '#e5e7eb', border: '4px solid #4b5563', borderRadius: '10px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  costMeterFill: { position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: '#f59e0b', transition: 'height 0.3s ease-out' },
+  meterContainer: { display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 },
+  costMeter: { backgroundColor: '#e5e7eb', border: '4px solid #4b5563', borderRadius: '10px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  costMeterFill: { position: 'absolute', bottom: 0, left: 0, backgroundColor: '#f59e0b' },
   costMeterText: { zIndex: 1, fontSize: '3rem', color: 'white', fontWeight: 'bold', textShadow: '2px 2px 4px #4b5563' },
   pipesContainer: { display: 'flex', gap: '5px', marginTop: '10px' },
   pipe: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
@@ -327,6 +354,11 @@ const styles = {
   pipeBodySubsidy: { width: '40px' },
   moneyFlowSmall: { position: 'absolute', width: '100%', height: '200%', background: 'linear-gradient(#fcd34d 20%, #f59e0b 20%)', backgroundSize: '100% 20px', animation: 'flow 1s linear infinite' },
   moneyFlowLarge: { position: 'absolute', width: '100%', height: '200%', background: 'linear-gradient(#fcd34d 20%, #f59e0b 20%)', backgroundSize: '100% 20px', animation: 'flow 0.3s linear infinite' },
+  mobilePipesContainer: { display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center', width: '100%' },
+  mobilePipeBody: { width: '80px', height: '20px', background: '#9ca3af', position: 'relative', overflow: 'hidden' },
+  mobilePipeBodySubsidy: { width: '120px' },
+  mobileMoneyFlowSmall: { position: 'absolute', width: '200%', height: '100%', background: 'linear-gradient(to right, #fcd34d 20%, #f59e0b 20%)', backgroundSize: '20px 100%', animation: 'flowHorizontal 1s linear infinite' },
+  mobileMoneyFlowLarge: { position: 'absolute', width: '200%', height: '100%', background: 'linear-gradient(to right, #fcd34d 20%, #f59e0b 20%)', backgroundSize: '20px 100%', animation: 'flowHorizontal 0.3s linear infinite' },
   eligibilityForm: { display: 'flex', flexDirection: 'column', gap: '15px', margin: '20px 0', width: '100%', maxWidth: '500px', background: 'rgba(255,255,255,0.7)', padding: '20px', borderRadius: '10px' },
   eligibilityQuestion: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
   questionLabel: { textAlign: 'left', flex: 1, marginRight: '10px', fontWeight: 'bold', color: '#1f2937' },
@@ -346,6 +378,7 @@ styleSheet.innerText = `
 @keyframes buildUp { from { transform: translateY(100px) scale(0.5); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 @keyframes bounceIn { 0% { transform: scale(0.1); opacity: 0; } 60% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
 @keyframes flow { from { background-position: 0 0; } to { background-position: 0 -40px; } }
+@keyframes flowHorizontal { from { background-position: 0 0; } to { background-position: -40px 0; } }
 @keyframes powerUpGlow { 0% { box-shadow: 0 0 5px #f59e0b; } 50% { box-shadow: 0 0 20px #fde047, 0 0 30px #f59e0b; } 100% { box-shadow: 0 0 5px #f59e0b; } }
 `;
 document.head.appendChild(styleSheet);
