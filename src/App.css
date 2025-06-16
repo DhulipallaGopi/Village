@@ -10,6 +10,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  /* FIX: Prevents any element from causing horizontal scrolling on the page */
+  overflow-x: hidden;
 }
 
 
@@ -252,7 +254,7 @@ h2 {
   align-items: center;
 }
 
-.btn, 
+.btn,
 .card-login-form button {
   font-weight: 700;
   font-size: 1rem;
@@ -358,10 +360,6 @@ h2 {
   margin-right: 100px;
 }
 
-/* Keep ALL your existing CSS and add these new styles at the end */
-
-/* ... your existing styles for .app, .hero, .btn, etc. ... */
-
 /* ======================================= */
 /* ✨ NEW Styles for the Full-Screen Game Page */
 /* ======================================= */
@@ -369,8 +367,12 @@ h2 {
 .game-page-container {
   /* Take up the entire screen */
   min-height: 100vh;
-  width: 100vw;
   
+  /* FIX: Changed 100vw to 100%. 
+     100vw caused overflow when a scrollbar was present. 
+     100% correctly fits the available width. */
+  width: 100%;
+
   /* Use a neutral background color */
   background-color: #e9eef2; 
 
