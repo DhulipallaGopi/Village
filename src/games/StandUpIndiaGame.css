@@ -1,0 +1,211 @@
+/* src/games/StandUpIndiaGame.css */
+.standup-game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.standup-game-container .scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+@keyframes standup-fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.standup-game-container .animate-fade-in {
+  animation: standup-fadeIn 0.5s ease-in-out;
+}
+
+@keyframes standup-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+.standup-game-container .animate-shake {
+  animation: standup-shake 0.5s ease-in-out;
+}
+
+.standup-game-container .instructions {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: bold;
+  color: #264653;
+  margin-bottom: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+.standup-game-container .character-options {
+  display: flex;
+  gap: clamp(10px, 3vw, 20px);
+  margin-bottom: 20px;
+}
+.standup-game-container .character-card {
+  position: relative;
+  width: clamp(80px, 20vw, 100px);
+  height: clamp(120px, 30vw, 150px);
+  cursor: pointer;
+  border: 4px solid #f4a261;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  overflow: hidden;
+}
+.standup-game-container .character-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.standup-game-container .character-card svg {
+  width: 100%;
+  height: 100%;
+}
+.standup-game-container .cross-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(50px, 15vw, 80px);
+  color: red;
+  opacity: 0.6;
+}
+.standup-game-container .bank-image {
+  width: clamp(200px, 60vw, 250px);
+}
+
+.standup-game-container .loan-mela-scene {
+  justify-content: space-around;
+  gap: 20px;
+}
+.standup-game-container .loan-progress-container {
+  width: 80%;
+  max-width: 400px;
+  height: 40px;
+  background-color: #e9c46a;
+  border: 4px solid #e76f51;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.standup-game-container .loan-progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #2a9d8f;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+.standup-game-container .catch-button {
+  background-color: #e76f51;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: clamp(100px, 35vw, 120px);
+  height: clamp(100px, 35vw, 120px);
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #c45a3a;
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  user-select: none;
+}
+.standup-game-container .catch-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 #c45a3a;
+}
+
+.standup-game-container .stacking-game-scene {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.standup-game-container .game-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.standup-game-container .base-cart {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 50px;
+}
+.standup-game-container .stack-item,
+.standup-game-container .falling-item {
+  position: absolute;
+  height: 30px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.standup-game-container .falling-item {
+  top: 0;
+  left: 0;
+  animation: standup-moveSideToSide 2s ease-in-out infinite alternate;
+}
+@keyframes standup-moveSideToSide {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100% - 150px)); } /* 150px is item width */
+}
+.standup-game-container .game-score {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: bold;
+  color: #264653;
+  text-shadow: 1px 1px 2px white;
+}
+
+.standup-game-container .game-over-scene {
+  gap: 30px;
+}
+.standup-game-container .game-over-title {
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: bold;
+  color: #e76f51;
+}
+.standup-game-container .final-score {
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  color: #264653;
+}
+.standup-game-container .play-again-button {
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #1b6d63;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.standup-game-container .play-again-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #1b6d63;
+}

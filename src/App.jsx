@@ -11,9 +11,10 @@ import { languages, footerTexts, buttonTexts, schemes } from "./data/data";
 import Ujjwala from "./games/Ujjwala";
 import PmKisanGame from "./games/PmKisanGame";
 import PMAY from "./games/PMAY";
+import StandUpIndiaGame from "./games/StandUpIndiaGame"; // NEW: Import the new game
 
 function App() {
-  const [lang, setLang] = useState("en-US"); // Default to the specific code
+  const [lang, setLang] = useState("en-US");
   const scrollRef = useRef(null);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -22,7 +23,8 @@ function App() {
   const gameComponents = {
     pmkisan: PmKisanGame,
     ujjwala: Ujjwala,
-    pmpay:PMAY
+    pmpay:PMAY,
+    standupindia: StandUpIndiaGame, // NEW: Register the new game component
   };
 
   const renderGameComponent = () => {
@@ -63,12 +65,12 @@ function App() {
   const baseLang = lang.split('-')[0];
   const currentButtonTexts = buttonTexts[baseLang] || buttonTexts["en"];
   const currentFooterText = footerTexts[baseLang] || footerTexts["en"];
-  
+
   if (isUserLoggedIn && activeSchemeKey) {
     return (
       <div className="game-page-container">
         <button className="btn back-btn" onClick={() => setActiveSchemeKey(null)}>
-          ← Back 
+          ← Back
         </button>
         <div className="game-content-area">
             {renderGameComponent()}

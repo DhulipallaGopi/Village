@@ -90,9 +90,66 @@ export const buttonTexts = {
   ks: { official: "سرکٲرؠ سایٹ", play: "گِنُن" },
   sa: { official: " अधिकृतं जालस्थानम्", play: "क्रीडतु" }
 };
-
 export const schemes = [
-  { id: 1, key: 'pmkisan', officialUrl: 'https://pmkisan.gov.in/', imageUrl: pmkisanImg, translations: { en: { name: 'PM-KISAN Scheme', description: 'Financial support for small and marginal farmers.' }, hi: { name: 'पीएम-किसान योजना', description: 'छोटे और सीमांत किसानों के लिए वित्तीय सहायता।' }, ta: { name: 'பிஎம்-கிசான் திட்டம்', description: 'சிறு மற்றும் குறு விவசாயிகளுக்கான நிதி உதவி.' }, kn: { name: 'ಪಿಎಂ-ಕಿಸಾನ್ ಯೋಜನೆ', description: 'ಸಣ್ಣ ಮತ್ತು ಅತಿ ಸಣ್ಣ ರೈತರಿಗೆ ಆರ್ಥಿಕ ನೆರವು.' }, te: { name: 'పీఎం-కిసాన్ పథకం', description: 'చిన్న మరియు సన్నకారు రైతులకు ఆర్థిక మద్దతు.' }, } },
-  { id: 2, key: 'ujjwala', officialUrl: 'https://www.pmuy.gov.in/', imageUrl: ujjwalaImg, translations: { en: { name: 'Ujjwala Yojana', description: 'Providing LPG connections to women from BPL households.' }, hi: { name: 'उज्ज्वला योजना', description: 'बीपीएल परिवारों की महिलाओं को एलपीजी कनेक्शन प्रदान करना।' }, ta: { name: 'உஜ்வாலா யோஜனா', description: 'வறுமைக் கோட்டிற்கு கீழ் உள்ள குடும்பங்களைச் சேர்ந்த பெண்களுக்கு எல்பிஜி இணைப்புகளை வழங்குதல்.' }, kn: { name: 'ಉಜ್ವಲ ಯೋಜನೆ', description: 'BPL ಕುಟುಂಬಗಳ ಮಹಿಳೆಯರಿಗೆ LPG ಸಂಪರ್ಕಗಳನ್ನು ಒದಗಿಸುವುದು.' }, te: { name: 'ఉజ్వల యోజన', description: 'BPL కుటుంబాలలోని మహిళలకు LPG కనెక్షన్లను అందించడం.' }, } },
-  { id: 3, key: 'pmpay', officialUrl: 'https://pmay-urban.gov.in/', imageUrl: pmayImg, translations: { en: { name: 'PMAY', description: 'Affordable housing for the urban and rural poor.' }, hi: { name: 'पीएमएवाई', description: 'शहरी और ग्रामीण गरीबों के लिए किफायती आवास.' }, ta: { name: 'பிஎம்ஏஒய்', description: 'நகர்ப்புற மற்றும் கிராமப்புற ஏழைகளுக்கு மலிவு விலை வீடுகள்.' }, kn: { name: 'ಪಿಎಂಎವೈ', description: 'ನಗರ ಮತ್ತು ಗ್ರಾಮೀಣ ಬಡವರಿಗೆ ಕೈಗೆಟುಕುವ ವಸತಿ.'}, te: { name: 'పిఎంఎవై', description: 'పట్టణ మరియు గ్రామీణ పేదలకు సరసమైన గృహాలు.'} } },
+  { 
+    id: 1, key: 'pmkisan', officialUrl: 'https://pmkisan.gov.in/', imageUrl: pmkisanImg, 
+    translations: { 
+      en: { name: 'PM-KISAN Scheme', description: 'Financial support for small and marginal farmers.' }, 
+      hi: { name: 'पीएम-किसान योजना', description: 'छोटे और सीमांत किसानों के लिए वित्तीय सहायता।' }, 
+      ta: { name: 'பிஎம்-கிசான் திட்டம்', description: 'சிறு மற்றும் குறு விவசாயிகளுக்கான நிதி உதவி.' }, 
+      kn: { name: 'ಪಿಎಂ-ಕಿಸಾನ್ ಯೋಜನೆ', description: 'ಸಣ್ಣ ಮತ್ತು ಅತಿ ಸಣ್ಣ ರೈತರಿಗೆ ಆರ್ಥಿಕ ನೆರವು.' }, 
+      te: { name: 'పీఎం-కిసాన్ పథకం', description: 'చిన్న మరియు సన్నకారు రైతులకు ఆర్థిక మద్దతు.' }, 
+    } 
+  },
+  { 
+    id: 2, key: 'ujjwala', officialUrl: 'https://www.pmuy.gov.in/', imageUrl: ujjwalaImg, 
+    translations: { 
+      en: { name: 'Ujjwala Yojana', description: 'Providing LPG connections to women from BPL households.' }, 
+      hi: { name: 'उज्ज्वला योजना', description: 'बीपीएल परिवारों की महिलाओं को एलपीजी कनेक्शन प्रदान करना।' }, 
+      ta: { name: 'உஜ்வாலா யோஜனா', description: 'வறுமைக் கோட்டிற்கு கீழ் உள்ள குடும்பங்களைச் சேர்ந்த பெண்களுக்கு எல்பிஜி இணைப்புகளை வழங்குதல்.' }, 
+      kn: { name: 'ಉಜ್ವಲ ಯೋಜನೆ', description: 'BPL ಕುಟುಂಬಗಳ ಮಹಿಳೆಯರಿಗೆ LPG ಸಂಪರ್ಕಗಳನ್ನು ಒದಗಿಸುವುದು.' }, 
+      te: { name: 'ఉజ్వల యోజన', description: 'BPL కుటుంబాలలోని మహిళలకు LPG కనెక్షన్లను అందించడం.' }, 
+    } 
+  },
+  { 
+    id: 3, key: 'pmpay', officialUrl: 'https://pmay-urban.gov.in/', imageUrl: pmayImg, 
+    translations: { 
+      en: { name: 'PMAY', description: 'Affordable housing for the urban and rural poor.' }, 
+      hi: { name: 'पीएमएवाई', description: 'शहरी और ग्रामीण गरीबों के लिए किफायती आवास.' }, 
+      ta: { name: 'பிஎம்ஏஒய்', description: 'நகர்ப்புற மற்றும் கிராமப்புற ஏழைகளுக்கு மலிவு விலை வீடுகள்.' }, 
+      kn: { name: 'ಪಿಎಂಎವೈ', description: 'ನಗರ ಮತ್ತು ಗ್ರಾಮೀಣ ಬಡವರಿಗೆ ಕೈಗೆಟುಕುವ ವಸತಿ.'}, 
+      te: { name: 'పిఎంఎవై', description: 'పట్టణ మరియు గ్రామీణ పేదలకు సరసమైన గృహాలు.'} 
+    } 
+  },
+  { 
+    id: 4, key: 'standupindia', officialUrl: 'https://standupindia.gov.in/', imageUrl: startupIndiaImg, 
+    translations: { 
+      en: { name: 'Stand Up India', description: 'Promotes entrepreneurship among SC/ST and women.' }, 
+      hi: { name: 'स्टैंड अप इंडिया', description: 'एससी/एसटी और महिलाओं के बीच उद्यमिता को बढ़ावा देता है।' }, 
+      ta: { name: 'ஸ்டாண்ட் அப் இந்தியா', description: 'SC/ST மற்றும் பெண்களுக்கு தொழில் முன்னேற்றத்தை ஊக்குவிக்கிறது.' }, 
+      kn: { name: 'ಸ್ಟ್ಯಾಂಡ್ ಅಪ್ ಇಂಡಿಯಾ', description: 'SC/ST ಮತ್ತು ಮಹಿಳೆಯರ ಮಧ್ಯೆ ಉದ್ಯಮಶೀಲತೆಯನ್ನು ಉತ್ತೇಜಿಸುತ್ತದೆ.' }, 
+      te: { name: 'స్టాండ్ అప్ ఇండియా', description: 'SC/ST మరియు మహిళల మధ్య పారిశ్రామిక వృద్ధిని ప్రోత్సహిస్తుంది.' }, 
+    } 
+  },
+  { 
+    id: 5, key: 'mahilashaktikendra', officialUrl: 'https://mahilashaktikendra-dcmsme.gov.in/', imageUrl: mskImg, 
+    translations: { 
+      en: { name: 'Mahila Shakti Kendra', description: 'Empowers rural women through skill development and training.' }, 
+      hi: { name: 'महिला शक्ति केंद्र', description: 'ग्रामीण महिलाओं को कौशल विकास और प्रशिक्षण के माध्यम से सशक्त बनाता है।' }, 
+      ta: { name: 'மகிலா சக்தி கendra', description: 'கிராமப்புற பெண்களை திறன் மேம்பாட்டும் பயிற்சியுமூலம் சுயமரியாதை வழங்குகிறது.' }, 
+      kn: { name: 'ಮಹಿಳಾ ಶಕ್ತಿ ಕೇಂದ್ರ', description: 'ಗ್ರಾಮೀಣ ಮಹಿಳೆಯರನ್ನು ಕೌಶಲ್ಯ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ತರಬೇತಿಯ ಮೂಲಕ ಸಬಲಗೊಳಿಸುತ್ತದೆ.' }, 
+      te: { name: 'మహిళా శక్తి కేంద్రం', description: 'గ్రామీణ మహిళలుకు నైపుణ్య అభివృద్ధి మరియు శిక్షణ ద్వారా అధికారాన్ని కల్పిస్తుంది.' }, 
+    } 
+  },
+  { 
+    id: 6, key: 'nsap', officialUrl: 'https://nsap.gov.in/', imageUrl: nsapImg, 
+    translations: { 
+      en: { name: 'National Social Assistance Programme (NSAP)', description: 'Provides social assistance to the elderly, widows, and disabled.' }, 
+      hi: { name: 'राष्ट्रीय सामाजिक सहायता कार्यक्रम', description: 'वृद्धों, विधवाओं और विकलांगों को सामाजिक सहायता प्रदान करता है।' }, 
+      ta: { name: 'தேசிய சமூக உதவி திட்டம்', description: 'வயோதிபோர், விதவைகள் மற்றும் மாற்றுத்திறனாளிகளுக்கு சமூக உதவிகளை வழங்குகிறது.' }, 
+      kn: { name: 'ರಾಷ್ಟ್ರೀಯ ಸಾಮಾಜಿಕ ಸಹಾಯ ಕಾರ್ಯಕ್ರಮ', description: 'ಜ್ಯेष्ठ ನಾಗರಿಕರು, ವಿಧವೆಯರು ಮತ್ತು ಅಂಗವಿಕಲರಿಗೆ ಸಾಮಾಜಿಕ ಸಹಾಯ ಒದಗಿಸುತ್ತದೆ.' }, 
+      te: { name: 'జాతీయ సామాజిక సహాయ కార్యక్రమం', description: 'వృద్ధులు, ధార్మికులు మరియు శరీరకంగా అంగవైకల్యులు ఉన్న వారికి సామాజిక సహాయం అందిస్తుంది.' }, 
+    } 
+  },
 ];
+
