@@ -10,7 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* FIX: Prevents any element from causing horizontal scrolling on the page */
+  /* This is correct: Prevents the whole page from scrolling horizontally */
   overflow-x: hidden;
 }
 
@@ -367,28 +367,17 @@ h2 {
 .game-page-container {
   /* Take up the entire screen */
   min-height: 100vh;
-  
-  /* FIX: Changed 100vw to 100%. 
-     100vw caused overflow when a scrollbar was present. 
-     100% correctly fits the available width. */
   width: 100%;
-
-  /* Use a neutral background color */
-  background-color: #e9eef2; 
-
-  /* Flexbox to center the game content */
+  background-color: #e9eef2;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* This is needed to position the back button */
-  position: relative; 
+  position: relative;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .game-content-area {
-  /* Give the game itself some nice styling */
   width: 100%;
   max-width: 900px; /* Adjust as needed */
   padding: 40px;
@@ -398,7 +387,6 @@ h2 {
 }
 
 .back-btn {
-  /* Position the back button at the top left */
   position: absolute;
   top: 20px;
   left: 20px;
@@ -438,6 +426,11 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  /* FIX: Reduce the main content padding on mobile for more space */
+  .content {
+    padding: 1.5rem 1rem;
+  }
+
   .hero { height: auto; padding: 1rem; }
   .hero h1 { font-size: 1.8rem; }
   .hero p { font-size: 1rem; margin-top: 0; }
@@ -445,9 +438,45 @@ h2 {
   .village-logo { height: 60px; margin: 0; }
   .language-selector { flex-direction: column; gap: 6px; margin-top: 1rem; padding: 0.4rem 0.8rem; }
   .carousel { flex-direction: column; }
-  .scroll-btn { font-size: 1.5rem; margin: 0.2rem; }
-  .card-grid { padding: 0.5rem; gap: 0.5rem; }
-  .scheme-card { min-width: 200px; max-width: 240px; padding: 0.8rem; }
+  .scroll-btn { display: none; /* Hide scroll buttons on mobile, user will swipe */ }
+
+  /*
+   * FIX FOR CARD CAROUSEL:
+   * This whole block is updated to fix the "half card" issue.
+   * 1. It makes the grid full-width and uses a negative margin to break out of the parent's padding.
+   * 2. It then adds padding back to the left/right of the grid.
+   * 3. This ensures the first card aligns with the page content, and the grid scrolls edge-to-edge.
+   * 4. Adds scroll-snapping for a better swipe experience.
+   */
+  .card-grid {
+    /* Make the container take the full screen width */
+    width: 100vw;
+    box-sizing: border-box;
+
+    /* Use a negative margin to pull it to the screen's edge.
+       This value MUST match the horizontal padding of the .content parent */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    /* Add padding back IN, so the first and last cards don't touch the screen edge */
+    padding: 0.5rem 1rem; /* Vertical padding and Horizontal padding */
+    gap: 0.75rem;
+
+    /* Add scroll snapping for a much better mobile experience */
+    scroll-snap-type: x mandatory;
+  }
+
+  .scheme-card {
+    min-width: 240px; /* Give cards a bit more space on mobile */
+    max-width: 260px;
+    padding: 0.8rem;
+    /* This tells each card to snap to the start of the container */
+    scroll-snap-align: start;
+  }
+
   .scheme-image { height: 130px; }
   .scheme-card h3 { font-size: 1.1rem; }
   .scheme-card p { font-size: 0.9rem; }
@@ -461,7 +490,12 @@ h2 {
 @media (max-width: 480px) {
   .hero h1 { font-size: 1.5rem; }
   .hero p { font-size: 0.95rem; }
-  .scheme-card { min-width: 160px; max-width: 200px; }
+
+  /* Adjust card size for very small screens */
+  .scheme-card {
+    min-width: 220px;
+    max-width: 240px;
+  }
   .scheme-image { height: 110px; }
   .scheme-card h3 { font-size: 1rem; }
   .scheme-card p { font-size: 0.85rem; }
